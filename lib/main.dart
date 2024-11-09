@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const TodoList(),
-        '/add-todo-screen': (_) => AddTodo(),
+        '/add-todo-screen': (_) =>  const AddTodo(),
       },
     );
   }

@@ -25,4 +25,25 @@ class SaveTask extends ChangeNotifier {
     tasks[index].isDone();
     notifyListeners();
   }
+
+  void updateTask(int index, String newTitle) {
+    if (index >= 0 && index < tasks.length) {
+      tasks[index] = Task(
+        title: newTitle,
+        isCompleted: tasks[index].isCompleted,
+      );
+      notifyListeners();
+    }
+  }
+
+  void editTask(int index, Task updatedTask) {
+    if (index >= 0 && index < tasks.length) {
+      tasks[index] = updatedTask;
+      notifyListeners();
+    }
+  }
+
+  int getTaskIndex(String title) {
+    return tasks.indexWhere((task) => task.title == title);
+  }
 }
