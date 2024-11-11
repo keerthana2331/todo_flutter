@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app_provider/models/save_task.dart';
-import 'package:todo_app_provider/models/task_model.dart';
 import 'package:todo_app_provider/pages/add_todo.dart';
 
 class TodoList extends StatelessWidget {
@@ -11,7 +10,10 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo List'),
+        title: const Text(
+          'Todo List',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
           Consumer<SaveTask>(
             builder: (context, task, child) {
@@ -22,7 +24,11 @@ class TodoList extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 16),
                   child: Text(
                     '$completedTasks/${task.tasks.length}',
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.tealAccent,
+                    ),
                   ),
                 ),
               );
@@ -46,21 +52,28 @@ class TodoList extends StatelessWidget {
               child: Text(
                 'No tasks yet!\nTap + to add a new task',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
             );
           }
 
-          return ListView.builder(
+          return ListView.separated(
             padding: const EdgeInsets.all(8),
             itemCount: task.tasks.length,
+            separatorBuilder: (context, index) => const Divider(
+              color: Colors.teal,
+              thickness: 1,
+            ),
             itemBuilder: (BuildContext context, index) {
               final currentTask = task.tasks[index];
 
               return Dismissible(
                 key: Key(currentTask.title),
                 background: Container(
-                  color: Colors.red,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   alignment: Alignment.centerRight,
                   padding: const EdgeInsets.only(right: 16),
                   child: const Icon(
@@ -84,7 +97,10 @@ class TodoList extends StatelessWidget {
                   );
                 },
                 child: Card(
-                  elevation: 2,
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -92,6 +108,7 @@ class TodoList extends StatelessWidget {
                     ),
                     leading: Checkbox(
                       value: currentTask.isCompleted,
+                      activeColor: Colors.tealAccent,
                       onChanged: (_) {
                         context.read<SaveTask>().checkTask(index);
                       },
@@ -103,35 +120,18 @@ class TodoList extends StatelessWidget {
                             ? TextDecoration.lineThrough
                             : TextDecoration.none,
                         color: currentTask.isCompleted
-                            ? Colors.grey
-                            : Colors.black,
+                            ? Colors.tealAccent.withOpacity(0.6)
+                            : Colors.white,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddTodo(
-                                  taskToEdit: currentTask,
-                                  editIndex: index,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          color: Colors.red,
-                          onPressed: () {
-                            _showDeleteDialog(context, task, currentTask);
-                          },
-                        ),
-                      ],
+                    trailing: Icon(
+                      currentTask.isCompleted
+                          ? Icons.check_circle_outline
+                          : Icons.circle_outlined,
+                      color: currentTask.isCompleted
+                          ? Colors.tealAccent
+                          : Colors.grey,
                     ),
                   ),
                 ),
@@ -140,49 +140,6 @@ class TodoList extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-
-  Future<void> _showDeleteDialog(
-    BuildContext context,
-    SaveTask taskProvider,
-    Task task,
-  ) async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Delete Task'),
-          content: Text('Are you sure you want to delete "${task.title}"?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('CANCEL'),
-            ),
-            TextButton(
-              onPressed: () {
-                taskProvider.removeTask(task);
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${task.title} deleted'),
-                    action: SnackBarAction(
-                      label: 'UNDO',
-                      onPressed: () {
-                        taskProvider.addTask(task);
-                      },
-                    ),
-                  ),
-                );
-              },
-              child: const Text(
-                'DELETE',
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 }
