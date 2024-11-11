@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.tealAccent,
         scaffoldBackgroundColor: const Color(0xFF101010),
-        fontFamily: 'Montserrat', // Make sure to include this in pubspec.yaml
+        fontFamily: 'Montserrat',
         appBarTheme: const AppBarTheme(
           elevation: 8,
           titleTextStyle: TextStyle(

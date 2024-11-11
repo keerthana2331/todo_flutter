@@ -77,14 +77,13 @@ class _AddTodoState extends State<AddTodo> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.teal, // Set the app bar color to teal
+        backgroundColor: Colors.teal,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Title input field
             TextField(
               controller: controller,
               autofocus: widget.taskToEdit == null,
@@ -102,7 +101,8 @@ class _AddTodoState extends State<AddTodo> {
                   borderRadius: BorderRadius.circular(15),
                   borderSide: const BorderSide(color: Colors.teal, width: 2),
                 ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 prefixIcon: const Icon(
                   Icons.task_alt,
                   color: Colors.teal,
@@ -110,8 +110,6 @@ class _AddTodoState extends State<AddTodo> {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Checkbox to mark task as completed
             CheckboxListTile(
               title: const Text(
                 'Mark as completed',
@@ -128,8 +126,6 @@ class _AddTodoState extends State<AddTodo> {
               contentPadding: const EdgeInsets.symmetric(horizontal: 0),
             ),
             const SizedBox(height: 30),
-
-            // Add or Update task button
             ElevatedButton(
               onPressed: () => saveTask(context),
               style: ElevatedButton.styleFrom(
@@ -137,7 +133,7 @@ class _AddTodoState extends State<AddTodo> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                iconColor: Colors.teal, // Set the button color
+                iconColor: Colors.teal,
                 elevation: 5,
               ),
               child: Text(
