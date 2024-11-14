@@ -23,55 +23,46 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.tealAccent,
-        scaffoldBackgroundColor: const Color(0xFF101010),
-        fontFamily: 'Montserrat',
+        scaffoldBackgroundColor: const Color(0xFF121212),
         appBarTheme: const AppBarTheme(
-          elevation: 8,
+          color: Color(0xFF1F1F1F),
+          elevation: 6,
+          shadowColor: Colors.black45,
           titleTextStyle: TextStyle(
             color: Colors.tealAccent,
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
-          iconTheme: IconThemeData(color: Colors.tealAccent),
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.tealAccent,
-          elevation: 6,
+          elevation: 4,
         ),
         cardTheme: CardTheme(
-          color: const Color(0xFF1F1F1F),
+          color: const Color(0xFF292929),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(12),
           ),
-          shadowColor: Colors.black45,
-          elevation: 5,
+          elevation: 4,
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: const Color(0xFF2C2C2C),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
           ),
-          hintStyle: const TextStyle(color: Colors.white54),
+          hintStyle: const TextStyle(color: Colors.white38),
         ),
         buttonTheme: ButtonThemeData(
           buttonColor: Colors.tealAccent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
         textTheme: const TextTheme(
-          bodyMedium: TextStyle(
-            color: Colors.white70,
-            fontSize: 16,
-            height: 1.5,
-          ),
-          titleLarge: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          bodyMedium: TextStyle(color: Colors.white70, fontSize: 16),
+          titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       initialRoute: '/',
